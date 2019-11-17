@@ -3,7 +3,7 @@ import Feeds from '../articles/feeds'
 
  const Dashboard = () => {
     return (
-        <div className="container">
+        <div className="container row section">
             <Feeds />
         </div>
     )

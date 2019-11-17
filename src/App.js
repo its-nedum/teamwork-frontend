@@ -11,6 +11,7 @@ import CreateGif from './components/gifs/createGif';
 import EditArticle from './components/articles/editArticle';
 import ArticleWithComment from './components/articles/articleWithComment';
 import Dashboard from './components/auths/dashboard';
+import GifWithComment from './components/gifs/gifWithComment';
 
 class App extends Component {
   render(){
@@ -25,7 +26,8 @@ class App extends Component {
           <Route exact path='/articles' component={CreateArticle} /> {/*create article form */}
           <Route path='/articles/:articleId/edit' component={EditArticle} /> {/*edit article form */}
           <Route path='/articles/:articleId' component={ArticleWithComment} /> {/*view article and its comment form */}
-          <Route path='/gifs' component={CreateGif} />
+          <Route exact path='/gifs' component={CreateGif} />
+          <Route path='/gifs/:gifId' component={GifWithComment} />
           <Route path='/signinAdmin' component={SignInAdmin} />
           <Route path='/signup' component={SignUp} />
         </Switch>
