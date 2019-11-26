@@ -22,7 +22,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/signin' component={SignIn} />
-          <Route path='/feeds' component={Dashboard} />
+          <Route path='/feed' component={Dashboard} />
           <Route exact path='/articles' component={CreateArticle} /> {/*create article form */}
           <Route path='/articles/:articleId/edit' component={EditArticle} /> {/*edit article form */}
           <Route path='/articles/:articleId' component={ArticleWithComment} /> {/*view article and its comment form */}

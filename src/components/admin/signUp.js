@@ -1,7 +1,33 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {createUser} from '../../store/actions/authActions'
 
 class SignUp extends Component {
+    state = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phoneNo: '',
+        gender: '',
+        jobRole: '',
+        department: '',
+        address: '',
+        isAdmin: ''
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state)
+        this.props.createUser(this.state)
+    }
+
     render() {
+        //console.log(this.props)
         return (
             <div className="container">
                 <form className="white">
@@ -9,49 +35,53 @@ class SignUp extends Component {
                     <div className="row">
                     <div className="input-field col s12 m6">
                         <label htmlFor="firstName">First Name</label>
-                        <input type="text" id="firstName" />
+                        <input type="text" id="firstName" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field col s12 m6">
                         <label htmlFor="lastName">Last Name</label>
-                        <input type="text" id="lastName" />
+                        <input type="text" id="lastName" onChange={this.handleChange}/>
                     </div>
                     </div>
                     <div className="row">
                     <div className="input-field col s12 m6">
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" />
+                        <input type="email" id="email" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field col s12 m6">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" />
+                        <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     </div>
                     <div className="row">
                     <div className="input-field col s12 m3">
-                        <label htmlFor="phone">Phone No</label>
-                        <input type="text" id="phone" />
+                        <label htmlFor="phoneNo">Phone No</label>
+                        <input type="text" id="phoneNo" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field col s12 m3">
                         <label htmlFor="gender">Gender</label>
-                        <input type="text" id="gender" />
+                        <input type="text" id="gender" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field col s12 m3">
-                        <label htmlFor="jobrole">Job Role</label>
-                        <input type="text" id="jobrole" />
+                        <label htmlFor="jobRole">Job Role</label>
+                        <input type="text" id="jobRole" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field col s12 m3">
                         <label htmlFor="department">Department</label>
-                        <input type="text" id="department" />
+                        <input type="text" id="department" onChange={this.handleChange}/>
                     </div>
                     </div>
                     <div className="row">
-                    <div className="input-field col s12">
+                    <div className="input-field col s9">
                         <label htmlFor="address">Address</label>
-                        <input type="text" id="address" />
+                        <input type="text" id="address" onChange={this.handleChange}/>
+                    </div>
+                    <div className="input-field col s3">
+                        <label htmlFor="isAdmin">IsAdmin? (True/False)</label>
+                        <input type="text" id="isAdmin" onChange={this.handleChange}/>
                     </div>
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Submit</button>
+                        <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>Submit</button>
                     </div>
                     
                 </form>
@@ -61,4 +91,10 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createUser: (user) => dispatch(createUser(user))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SignUp)
