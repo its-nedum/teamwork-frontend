@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import SingleArticle from './singleArticle'
 import ArticleComment from '../comments/articleComment'
 import AddArticleComment from '../comments/addArticleComment'
+import {deleteArticle} from '../../store/actions/articlesActions'
+import setAuthToken from '../../helpers/setAuthToken'
 
 class ArticleWithComment extends Component {
     state = {
@@ -13,7 +16,7 @@ class ArticleWithComment extends Component {
       const response = await fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${this.props.match.params.articleId}`, {
        headers: {
          'Content-Type': 'application/json',
-         'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg'
+         'Authorization': setAuthToken()
        }  
      })
      
@@ -24,25 +27,40 @@ class ArticleWithComment extends Component {
      this.setState({
          article: myData.data
      })
-     console.log(myData)
+    // console.log(myData)
    }catch(err){ 
        console.log(err)
    }
       
    }
+
+   handleDelete = (articleId) => {
+    this.props.deleteArticle(articleId)
+    }
+
     render(){
+        //console.log(this.props)
+        const {article} = this.state
+        const comments = article.comments
+        const articleId = this.props.match.params.articleId;
     return (
         <div className="container section">
             <div className="row">
-                <SingleArticle article={this.state}/>
-                <AddArticleComment />
+                <SingleArticle article={article} deleteArticle={this.props.deleteArticle}/>
+                <AddArticleComment articleId={articleId}/>
             </div>
             <div className="row">
-                <ArticleComment />
+                <ArticleComment comments={comments}/>
             </div>
         </div>
     )
 }
 }
 
-export default ArticleWithComment
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteArticle: (articleId) => dispatch(deleteArticle(articleId))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ArticleWithComment)

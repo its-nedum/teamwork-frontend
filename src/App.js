@@ -4,7 +4,6 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom'
 import Home from './components/auths/home'
 import SignIn from './components/auths/signIn'
 import Navbar from './components/links/navbar'
-import SignInAdmin from './components/admin/signInAdmin'
 import SignUp from './components/admin/signUp';
 import CreateArticle from './components/articles/createArticle';
 import CreateGif from './components/gifs/createGif';
@@ -28,7 +27,6 @@ class App extends Component {
           <Route path='/articles/:articleId' component={ArticleWithComment} /> {/*view article and its comment form */}
           <Route exact path='/gifs' component={CreateGif} />
           <Route path='/gifs/:gifId' component={GifWithComment} />
-          <Route path='/signinAdmin' component={SignInAdmin} />
           <Route path='/signup' component={SignUp} />
         </Switch>
       </div>

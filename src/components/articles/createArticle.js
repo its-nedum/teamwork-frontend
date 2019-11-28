@@ -21,6 +21,7 @@ class CreateArticle extends Component {
     }
 
     render() {
+        const { notification } = this.props
         return (
             <div className='container'>
             <form className="white">
@@ -38,15 +39,25 @@ class CreateArticle extends Component {
                 <div className="input-field">
                     <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>Post</button>
                 </div>
+                <div className="red-text center">
+                        { notification ? <p>{ notification }</p> : null}
+                    </div>
                 </form>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        notification: state.article.notification
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createArticle: (article) => dispatch(createArticle(article))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateArticle)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateArticle)

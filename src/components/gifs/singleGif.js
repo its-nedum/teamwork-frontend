@@ -1,17 +1,22 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-const SingleGif = () => {
+
+const SingleGif = (props) => {
+    const {gif, deleteGif} = props
     return (
        <div className="col s12 m8">
             <div className="card z-depth-0">
+            <div className="card-image">
+                        <img src={gif.image_url} alt=""/>
+                    </div>
                 <div className="card-content">
-                    <span className="card-title">This is my first Gif</span>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis molestiae eum qui ea laboriosam nihil hic eveniet quibusdam explicabo ex, vel aperiam asperiores eligendi deserunt enim ad veniam dolor aspernatur?</p>
+                    <span className="card-title">{gif.title}</span>
                     <div className="card-action grey lighten-2 grey-text">
-                        Created 14-11-2019
-                        <a href="/gifs/2/delete" className="btn-floating pulse red">
+                        {gif.created_at}
+                        <Link to="#" className="btn-floating pulse red" onClick={()=>{ deleteGif(gif.id)}}>
                         <i className="material-icons">remove</i>
-                        </a> 
+                        </Link> 
                     </div>
                 </div>
             </div>

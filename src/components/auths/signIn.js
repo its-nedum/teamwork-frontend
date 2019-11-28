@@ -16,7 +16,7 @@ class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state) 
+        //console.log(this.state) 
       this.props.login(this.state)    
     }
 
@@ -25,7 +25,7 @@ class SignIn extends Component {
         return(
             <div className="container">
                 <form className="white">
-                    <h5 className="grey-text text-darken-3">Employee Sign In</h5>
+                    <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="row">
                     <div className="input-field col s12">
                         <label htmlFor="email">Email</label>

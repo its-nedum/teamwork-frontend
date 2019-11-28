@@ -7,11 +7,6 @@ import {createStore,applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import rootReducer from './store/reducers/rootReducer'
 import thunk from 'redux-thunk'
-import {setAuthToken} from './helpers/setAuthToken'
-
-if(localStorage.teamworkAuthTK){
-    console.log(setAuthToken(localStorage.teamworkAuthTK))
-}
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

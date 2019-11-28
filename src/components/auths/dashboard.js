@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Feeds from '../articles/feeds'
-import { connect } from 'react-redux'
-
+import setAuthToken from '../../helpers/setAuthToken'
 
  class Dashboard extends Component {
      state = {
@@ -13,7 +12,7 @@ import { connect } from 'react-redux'
        const response = await fetch('https://its-nedum-teamwork-api.herokuapp.com/api/v1/feed', {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg'
+          'Authorization': setAuthToken()
         }
       })
       
@@ -24,7 +23,7 @@ import { connect } from 'react-redux'
       this.setState({
           feeds: myData.data
       })
-      //console.log(this.state)
+      
     }catch(err){ 
         console.log(err)
     }
@@ -33,8 +32,7 @@ import { connect } from 'react-redux'
    
 
     render(){ 
-       //console.log(this.props)
-        //const { feeds } = this.props;
+       
         return (
             <div className="container row section">
                 <Feeds feeds={this.state}/> 
@@ -43,10 +41,6 @@ import { connect } from 'react-redux'
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        feeds: state.feed.feeds
-    }
-}
 
-export default connect(mapStateToProps)(Dashboard)
+
+export default Dashboard

@@ -1,3 +1,5 @@
+import setAuthToken from '../../helpers/setAuthToken'
+
 export const createArticle = (article) => {
     try{
     return (dispatch) => {
@@ -6,18 +8,16 @@ export const createArticle = (article) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg',
+            'Authorization': setAuthToken()
         },
         body: JSON.stringify(article)
     }
     return fetch('https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles', configuration)
-            .then( (res) => {
-                res.json()
-                console.log(res)
-                .then( () => {
+            .then( (res) => { res.json() })
+            .then( () => {
                     dispatch({type: 'CREATE_ARTICLE', article})
-                });
-            }).catch( (err) => {
+                })
+            .catch( (err) => {
                 dispatch({ type: 'CREATE_ARTICLE_ERROR', err });
             })  
     }
@@ -27,6 +27,12 @@ export const createArticle = (article) => {
 }
 
 export const editArticle = (article) => {
+    
+    const articleToEdit = {
+        title: article.title,
+        article: article.article
+    }
+    //console.log(articleToEdit)
     try{
     return (dispatch) => {
         //FETCH API call 
@@ -34,17 +40,16 @@ export const editArticle = (article) => {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg',
+            'Authorization': setAuthToken()
         },
-        body: JSON.stringify(article)
+        body: JSON.stringify(articleToEdit)
     }
-    return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${article.id}`, configuration)
-            .then( (res) => {
-                res.json()
-                .then( () => {
-                    dispatch({type: 'EDIT_ARTICLE', article})
-                });
-            }).catch( (err) => {
+    return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${article.article_id}`, configuration)
+            .then( (res) => { res.json() })
+            .then( () => {
+                    dispatch({type: 'EDIT_ARTICLE', articleToEdit})
+                })
+            .catch( (err) => {
                 dispatch({ type: 'EDIT_ARTICLE_ERROR', err });
             })
     }
@@ -53,7 +58,8 @@ export const editArticle = (article) => {
     }
 }
 
-export const deleteArticle = (article) => { 
+export const deleteArticle = (articleId) => { 
+    console.log(articleId)
     try{
         return (dispatch) => {
             //FETCH API call 
@@ -61,16 +67,15 @@ export const deleteArticle = (article) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg',
+                'Authorization': setAuthToken()
             }
         }
-        return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${article.id}`, configuration)
-                .then( (res) => {
-                    res.json()
-                    .then( () => {
-                        dispatch({type: 'DELETE_ARTICLE', article})
-                    });
-                }).catch( (err) => {
+        return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${articleId}`, configuration)
+                .then( (res) => { res.json() })
+                .then( () => {
+                        dispatch({type: 'DELETE_ARTICLE', articleId})
+                    })
+                .catch( (err) => {
                     dispatch({ type: 'DELETE_ARTICLE_ERROR', err });
                 })
         }
@@ -80,7 +85,8 @@ export const deleteArticle = (article) => {
 }
 
 
-export const postArticleComment = (article) => {
+export const postArticleComment = (comment) => {
+    
     try{
         return (dispatch) => {
             //FETCH API call 
@@ -88,17 +94,16 @@ export const postArticleComment = (article) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg',
+                'Authorization': setAuthToken()
             },
-            body: JSON.stringify(article)
+            body: JSON.stringify(comment)
         }
-        return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${article.id}/comment`, configuration)
-                .then( (res) => {
-                    res.json()
-                    .then( () => {
-                        dispatch({type: 'CREATE_COMMENT', article})
-                    });
-                }).catch( (err) => {
+        return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${comment.articleId}/comment`, configuration)
+                .then( (res) => { res.json() })
+                .then( () => {
+                        dispatch({type: 'CREATE_COMMENT', comment})
+                    })
+                .catch( (err) => {
                     dispatch({ type: 'CREATE_COMMENT_ERROR', err });
                 })
         }
@@ -108,28 +113,3 @@ export const postArticleComment = (article) => {
 }
 
 
-// export const singleArticle = (article) => {
-//     try{
-//         return (dispatch) => {
-//             //FETCH API call 
-//         let configuration = {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwaUBnbWFpbC5jb20iLCJpYXQiOjE1NzQyNjM0NjksImV4cCI6MTU3NDg2ODI2OX0.NyY7lZsU_954vXu0KhcNU_PBz-nwqPRF31fpzWJcZbg',
-//             },
-//         }
-//         return fetch(`https://its-nedum-teamwork-api.herokuapp.com/api/v1/articles/${article.id}`, configuration)
-//                 .then( (res) => {
-//                     res.json()
-//                     .then( () => {
-//                         dispatch({type: 'CREATE_COMMENT', article})
-//                     });
-//                 }).catch( (err) => {
-//                     dispatch({ type: 'CREATE_COMMENT_ERROR', err });
-//                 })
-//         }
-//     }catch(err){
-//         console.log(err)
-//         }
-// }
