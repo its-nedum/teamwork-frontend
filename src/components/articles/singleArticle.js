@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
                         <span className="card-title">{article.title}</span>
                         <p>{article.article}</p>
                         <div className="card-action grey lighten-2 grey-text">
-                            {article.created_at}
+                             {article.created_at}
                            <Link to={`/articles/${article.id}/edit`} className="btn-floating pulse">
                             <i className="material-icons">edit</i>
                             </Link>
