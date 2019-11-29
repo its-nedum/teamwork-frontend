@@ -7,10 +7,9 @@ export const createGif = (newGif) => {
     let configuration = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             'Authorization': setAuthToken()
         },
-        body: JSON.stringify(newGif)
+        body: newGif
     }
     return fetch('https://its-nedum-teamwork-api.herokuapp.com/api/v1/gifs', configuration)
             .then( (res) => { res.json() })

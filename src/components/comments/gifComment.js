@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 const GifComment = (props) => {
     const {comments} = props
@@ -10,7 +11,7 @@ const GifComment = (props) => {
                     <div className="card z-depth-0" key={comment.id}>
                         <div className="card-content">
                             <p>{comment.comment}</p>
-                            <div className="card-action grey lighten-2 grey-text">{comment.created_at}</div>
+                            <div className="card-action grey lighten-2 grey-text"><p> Posted {moment(comment.created_at).calendar()}</p></div>
                         </div>
                     </div>
                  )
@@ -18,5 +19,6 @@ const GifComment = (props) => {
         </div>
     )
 }
+
 
 export default GifComment

@@ -2,21 +2,21 @@ import React from 'react'
 import SignedInLinks from './signedInLinks'
 import SignedOutLinks from './signedOutLinks'
 import {Link} from 'react-router-dom'
-import {decideLinks} from '../../helpers/util'
+import {getToken} from '../../helpers/util'
 
 
 const Navbar = () => {
    
-    const links = decideLinks() ? <SignedInLinks /> : <SignedOutLinks />
+    const links = getToken() ? <SignedInLinks /> : <SignedOutLinks />
     
     return (
-        <nav className="nav-wrapper grey darken-3">
+        <nav className="nav-wrapper transparent">
             <div className = 'container'>
                 <Link to="#" className="sidenav-trigger" data-target="signedIn-mobile-menu" >
                     <i className="material-icons">menu</i>
                 </Link>
                 {links} 
-                <Link to='/' className='brand-logo'>Teamwork App</Link>
+                <Link to='/' className='brand-logo'>Teamwork</Link>
             </div>
         </nav>
     )

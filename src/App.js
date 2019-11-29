@@ -11,6 +11,7 @@ import EditArticle from './components/articles/editArticle';
 import ArticleWithComment from './components/articles/articleWithComment';
 import Dashboard from './components/auths/dashboard';
 import GifWithComment from './components/gifs/gifWithComment';
+import About from './components/links/about';
 
 class App extends Component {
   render(){
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path='/gifs' component={CreateGif} />
           <Route path='/gifs/:gifId' component={GifWithComment} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/about' component={About} />
         </Switch>
       </div>
       </BrowserRouter>

@@ -10,6 +10,6 @@ export const refreshCurrentPage = () => {
     }
 }
 
-export const decideLinks = () => {
-    return localStorage.getItem('teamworkToken')
+export const getToken = () => {
+    return localStorage.getItem('teamworkToken') 
 }

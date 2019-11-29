@@ -22,7 +22,7 @@ class SignIn extends Component {
     }
 
     render(){
-        const {authToken} = this.props
+        const {authToken, notification} = this.props
         if(authToken) return <Redirect to='/feed' />
         return(
             <div className="container">
@@ -41,6 +41,9 @@ class SignIn extends Component {
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>LogIn</button>
                     </div>
+                    <div className="red-text center">
+                        { notification ? <p>{ notification }</p> : null}
+                    </div>
                 </form>
                
             </div>
@@ -50,7 +53,8 @@ class SignIn extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        authToken: state.token.authToken
+        authToken: state.token.authToken,
+        notification: state.auth.notification
     }
 }
 

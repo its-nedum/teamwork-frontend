@@ -23,17 +23,17 @@ class SignUp extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
-        this.props.createUser(this.state)
+       this.props.createUser(this.state)
     }
 
     render() {
-        const {authToken} = this.props
+        const {authToken, notification} = this.props
         if(!authToken) return <Redirect to='/signin' />
         return (
             <div className="container">
                 <form className="white">
                     <h5 className="grey-text text-darken-3">Create Employee Account</h5>
+                    <h6 className="red-text">(Admins only)</h6>
                     <div className="row">
                     <div className="input-field col s12 m6">
                         <label htmlFor="firstName">First Name</label>
@@ -82,10 +82,13 @@ class SignUp extends Component {
                         <input type="text" id="isAdmin" onChange={this.handleChange}/>
                     </div>
                     </div>
+                    
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>Submit</button>
                     </div>
-                    
+                    <div className="red-text center">
+                        { notification ? <p>{ notification }</p> : null}
+                    </div>
                 </form>
                 
             </div>
@@ -95,7 +98,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        authToken: state.token.authToken
+        authToken: state.token.authToken,
+        notification: state.auth.notification
     }
 }
 

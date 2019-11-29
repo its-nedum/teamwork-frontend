@@ -23,26 +23,29 @@ class CreateGif extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
-       this.props.createGif(this.state)
+        const formData = new FormData()
+        formData.append('title', this.state.title)
+        formData.append('gif', this.state.gif)
+       this.props.createGif(formData)
     }
+
     render() {
         const { notification, authToken } = this.props
         if(!authToken) return <Redirect to='/signin' />
         return (
             <div className='container'>
-            <form className="white">
+            <form action="#" className="white">
                 <h5 className="grey-text text-darken-3">Create A Gif Post</h5>
                 <div className="row">
                 <div className="input-field col s12">
                     <label htmlFor="title">Title</label>
-                    <input type="text" id="title" onChange={this.handleChange}/>
+                    <input type="text" id="title" onChange={this.handleChange} />
                 </div>
                 
                 <div className="file-field input-field col s12">
                 <div className="btn">
                     <span>gif</span>
-                    <input type="file" name="gif" onChange={this.handleFile}/>
+                    <input type="file" name="gif" onChange={this.handleFile} />
                 </div>
                 <div className="file-path-wrapper">
                     <input className="file-path validate" type="text"/>

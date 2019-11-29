@@ -42,6 +42,7 @@ const articlesReducer = (state = initState, action) => {
             }
         case 'CREATE_COMMENT':
             console.log('comment created')
+            window.location.reload()
             return {
                 ...state,
                 notification: 'Comment created successfully'
