@@ -6,7 +6,7 @@ export class Home extends Component {
         return (
             <div className="row">
                 
-                <img src={bgImg} className="responsive-img"/>            
+                <img src={bgImg} className="responsive-img" alt="img"/>            
                
             </div>
         )
