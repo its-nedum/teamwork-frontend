@@ -5,6 +5,7 @@ import AddGifComment from '../comments/addGifComment'
 import GifComment from '../comments/gifComment'
 import { deleteGif } from '../../store/actions/gifsActions'
 import setAuthToken from '../../helpers/setAuthToken'
+import {Redirect} from 'react-router-dom'
 
 class GifWithComment extends Component {
     state = {
@@ -39,9 +40,11 @@ class GifWithComment extends Component {
     }
 
    render(){
+    const {authToken} = this.props
     const {gif} = this.state
     const comments = gif.comments
     const gifId = this.props.match.params.gifId;
+    if(!authToken) return <Redirect to='/signin' />
     return (
         <div className="container section">
             <div className="row">
@@ -56,10 +59,16 @@ class GifWithComment extends Component {
 }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authToken: state.token.authToken
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteGif: (gifId) => dispatch(deleteGif(gifId))
     }
 }
 
-export default connect(null, mapDispatchToProps)(GifWithComment)
+export default connect(mapStateToProps, mapDispatchToProps)(GifWithComment)

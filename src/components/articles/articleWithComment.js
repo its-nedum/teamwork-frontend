@@ -5,6 +5,7 @@ import ArticleComment from '../comments/articleComment'
 import AddArticleComment from '../comments/addArticleComment'
 import {deleteArticle} from '../../store/actions/articlesActions'
 import setAuthToken from '../../helpers/setAuthToken'
+import {Redirect} from 'react-router-dom'
 
 class ArticleWithComment extends Component {
     state = {
@@ -27,7 +28,7 @@ class ArticleWithComment extends Component {
      this.setState({
          article: myData.data
      })
-    // console.log(myData)
+    
    }catch(err){ 
        console.log(err)
    }
@@ -39,10 +40,11 @@ class ArticleWithComment extends Component {
     }
 
     render(){
-        //console.log(this.props)
+        const {authToken} = this.props
         const {article} = this.state
         const comments = article.comments
         const articleId = this.props.match.params.articleId;
+        if(!authToken) return <Redirect to='/signin' />
     return (
         <div className="container section">
             <div className="row">
@@ -57,10 +59,16 @@ class ArticleWithComment extends Component {
 }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authToken: state.token.authToken
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteArticle: (articleId) => dispatch(deleteArticle(articleId))
     }
 }
 
-export default connect(null, mapDispatchToProps)(ArticleWithComment)
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleWithComment)

@@ -16,7 +16,7 @@ const SignedInLinks = () => {
             <li><NavLink to='/signup'>Create Employee</NavLink></li>
             <li><NavLink to='/articles'>Create Article</NavLink></li>
             <li><NavLink to='/gifs'>Create Gif</NavLink></li>
-            <li><NavLink to='/'>LogOut</NavLink></li>
+            <li><NavLink to='#' onClick={() => logOut()}>LogOut</NavLink></li>
         </ul>
         </div>
     )

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import Feeds from '../articles/feeds'
 import setAuthToken from '../../helpers/setAuthToken'
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
  class Dashboard extends Component {
      state = {
@@ -32,7 +34,8 @@ import setAuthToken from '../../helpers/setAuthToken'
    
 
     render(){ 
-       
+       const {authToken} = this.props
+       if(!authToken) return <Redirect to='/signin' />
         return (
             <div className="container row section">
                 <Feeds feeds={this.state}/> 
@@ -41,6 +44,10 @@ import setAuthToken from '../../helpers/setAuthToken'
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authToken: state.token.authToken
+    }
+}
 
-
-export default Dashboard
+export default connect(mapStateToProps)(Dashboard)

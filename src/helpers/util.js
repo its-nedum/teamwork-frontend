@@ -1,12 +1,10 @@
-// import React from 'react';
-// import {Redirect} from 'react-router-dom'
 
 export const logOut = () => {
     localStorage.removeItem('teamworkToken')
-    checkAuthToken()
+    refreshCurrentPage()
 }
 
-export const checkAuthToken = () => {
+export const refreshCurrentPage = () => {
     if(!localStorage.getItem('teamworkToken')){
         window.location.reload()
     }

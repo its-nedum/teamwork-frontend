@@ -3,11 +3,12 @@ import SignedInLinks from './signedInLinks'
 import SignedOutLinks from './signedOutLinks'
 import {Link} from 'react-router-dom'
 import {decideLinks} from '../../helpers/util'
-//import {checkAuthToken} from '../../helpers/util'
+
 
 const Navbar = () => {
+   
     const links = decideLinks() ? <SignedInLinks /> : <SignedOutLinks />
-    //checkAuthToken()
+    
     return (
         <nav className="nav-wrapper grey darken-3">
             <div className = 'container'>

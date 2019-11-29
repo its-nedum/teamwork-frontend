@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { createGif } from '../../store/actions/gifsActions'
+import {Redirect} from 'react-router-dom'
 
 class CreateGif extends Component {
     state = {
@@ -26,7 +27,8 @@ class CreateGif extends Component {
        this.props.createGif(this.state)
     }
     render() {
-        const { notification } = this.props
+        const { notification, authToken } = this.props
+        if(!authToken) return <Redirect to='/signin' />
         return (
             <div className='container'>
             <form className="white">
@@ -61,7 +63,8 @@ class CreateGif extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        notification: state.gif.notification
+        notification: state.gif.notification,
+        authToken: state.token.authToken
     }
 }
 

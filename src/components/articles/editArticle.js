@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {editArticle} from '../../store/actions/articlesActions'
 import setAuthToken from '../../helpers/setAuthToken'
+import {Redirect} from 'react-router-dom'
 
 class EditArticle extends Component {
     state = {
@@ -47,8 +48,9 @@ class EditArticle extends Component {
     }
 
     render(){
-        //console.log(this.props)
-        const { notification } = this.props
+        
+        const { notification, authToken } = this.props
+        if(!authToken) return <Redirect to='/signin' />
         return (
             <div className="container">
             <form className="white">
@@ -78,7 +80,8 @@ class EditArticle extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        notification: state.article.notification
+        notification: state.article.notification,
+        authToken: state.token.authToken
     }
 }
 

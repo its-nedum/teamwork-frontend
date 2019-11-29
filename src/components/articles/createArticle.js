@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import { createArticle } from '../../store/actions/articlesActions'
 
 class CreateArticle extends Component {
@@ -16,12 +17,12 @@ class CreateArticle extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(this.props)
       this.props.createArticle(this.state)      
     }
 
     render() {
-        const { notification } = this.props
+        const { notification, authToken } = this.props
+        if(!authToken) return <Redirect to='/signin' />
         return (
             <div className='container'>
             <form className="white">
@@ -50,7 +51,8 @@ class CreateArticle extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        notification: state.article.notification
+        notification: state.article.notification,
+        authToken: state.token.authToken
     }
 }
 

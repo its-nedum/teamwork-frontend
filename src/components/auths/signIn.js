@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {loginUser} from '../../store/actions/authActions'
+import {Redirect} from 'react-router-dom'
+
 
 class SignIn extends Component {
     state = {
@@ -16,12 +18,12 @@ class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(this.state) 
       this.props.login(this.state)    
     }
 
     render(){
-        //console.log(this.props) 
+        const {authToken} = this.props
+        if(authToken) return <Redirect to='/feed' />
         return(
             <div className="container">
                 <form className="white">
@@ -46,10 +48,16 @@ class SignIn extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authToken: state.token.authToken
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (user) => dispatch(loginUser(user))
     }
 }
 
-export default connect(null, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
