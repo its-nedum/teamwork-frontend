@@ -19,7 +19,7 @@ const authReducer = (state = initState, action) => {
             }
         case 'USER_LOGIN':
             console.log('user login')
-            window.location.reload()
+            window.open('/feed','_self')
             return {
                 ...state,
                 notification: 'Login was successful'
