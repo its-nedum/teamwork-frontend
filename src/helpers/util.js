@@ -6,7 +6,7 @@ export const logOut = () => {
 
 export const refreshCurrentPage = () => {
     if(!localStorage.getItem('teamworkToken')){
-        window.open('/signin','_self')
+        window.location.reload()
     }
 }
 

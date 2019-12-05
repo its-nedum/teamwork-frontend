@@ -8,7 +8,7 @@ const  About = () => {
                 application is to facilitate more interaction between colleagues and promote team bonding.</h4>
                 <p></p>
                 <span>User account can only be created by an Admin but you're my guys so..</span>
-                <p>Email: doe@gmail.com <br/> Password: qwerty </p>
+                
                 <p>Don't forget to leave your feedback on <a href='https://www.twitter.com/its_nedum' target="_blank" rel="noopener noreferrer">Twitter</a></p>
                 </div>
                 <div className="white-text col s12 m4">
