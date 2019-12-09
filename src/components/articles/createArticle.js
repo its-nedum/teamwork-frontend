@@ -5,8 +5,9 @@ import { createArticle } from '../../store/actions/articlesActions'
 
 class CreateArticle extends Component {
     state = {
-        title: '',
-        article: ''
+        title: null,
+        article: null,
+        emptyVarError: null
     }
 
     handleChange = (e) => {
@@ -17,7 +18,12 @@ class CreateArticle extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-      this.props.createArticle(this.state)      
+        if(this.state.title !== null && this.state.article !== null){
+            this.props.createArticle(this.state)   
+        }else{
+            this.setState({emptyVarError: 'All fields are required'})
+        }
+         
     }
 
     render() {
@@ -42,6 +48,7 @@ class CreateArticle extends Component {
                 </div>
                 <div className="red-text center">
                         { notification ? <p>{ notification }</p> : null}
+                        { this.state.emptyVarError}
                     </div>
                 </form>
             </div>

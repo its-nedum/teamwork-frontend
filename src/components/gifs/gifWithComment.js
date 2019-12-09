@@ -6,10 +6,12 @@ import GifComment from '../comments/gifComment'
 import { deleteGif } from '../../store/actions/gifsActions'
 import setAuthToken from '../../helpers/setAuthToken'
 import {Redirect} from 'react-router-dom'
+import {ClipLoader} from 'react-spinners'
 
 class GifWithComment extends Component {
     state = {
-        gif: []
+        gif: [],
+        isLoaded: false
     }
 
  async componentDidMount(){
@@ -28,6 +30,7 @@ class GifWithComment extends Component {
      this.setState({
          gif: myData.data
      })
+     this.setState({isLoaded: true})
     //console.log(myData)
    }catch(err){ 
        console.log(err)
@@ -47,6 +50,8 @@ class GifWithComment extends Component {
     if(!authToken) return <Redirect to='/signin' />
     return (
         <div className="container section">
+            {this.state.isLoaded ? 
+            <div>
             <div className="row">
                 <SingleGif gif={gif} deleteGif={this.props.deleteGif}/>
                 <AddGifComment gifId={gifId}/>
@@ -54,6 +59,17 @@ class GifWithComment extends Component {
             <div className="row">
                 <GifComment comments={comments}/>
             </div>
+            </div>
+            : <div className="sweet-loading">
+                <ClipLoader 
+                    sizeUnit={"px"}
+                    size={200}
+                    color={"#0659FB"}
+                    loading={this.state.loading}
+                />
+            </div>
+            }
+            
         </div>
     )
 }

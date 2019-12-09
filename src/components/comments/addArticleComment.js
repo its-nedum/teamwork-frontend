@@ -4,8 +4,9 @@ import {postArticleComment} from '../../store/actions/articlesActions'
 
 class AddArticleComment extends Component {
     state = {
-        comment: '',
-        articleId: this.props.articleId
+        comment: null,
+        articleId: this.props.articleId,
+        emptyVarError: null
     }
     handleChange = (e) => {
         this.setState({
@@ -14,8 +15,12 @@ class AddArticleComment extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        
+       if(this.state.comment !== null){
         this.props.postComment(this.state)
+       } else{
+           this.setState({emptyVarError: 'All fields are required'})
+       }
+        
     }
 
     render() {
@@ -32,6 +37,7 @@ class AddArticleComment extends Component {
                     </div>
                     <div className="red-text center">
                         { notification ? <p>{ notification }</p> : null}
+                        { this.state.emptyVarError }
                     </div>
                 </form>
             </div>

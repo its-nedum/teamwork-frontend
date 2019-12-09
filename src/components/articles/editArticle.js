@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import {editArticle} from '../../store/actions/articlesActions'
 import setAuthToken from '../../helpers/setAuthToken'
 import {Redirect} from 'react-router-dom'
+import {ClipLoader} from 'react-spinners'
 
 class EditArticle extends Component {
     state = {
         title: '',
         article: '',
-        article_id: this.props.match.params.articleId
+        article_id: this.props.match.params.articleId,
+        isLoaded: false
     }
 
    async componentDidMount(){
@@ -29,6 +31,7 @@ class EditArticle extends Component {
               title: articleToEdit.title,
               article: articleToEdit.article
           })
+          this.setState({isLoaded: true})
          }catch(err){ 
              console.log(err)
          }
@@ -53,7 +56,8 @@ class EditArticle extends Component {
         if(!authToken) return <Redirect to='/signin' />
         return (
             <div className="container">
-            <form className="white">
+            {this.state.isLoaded ?
+                <form className="white">
                 <h5 className="grey-text text-darken-3">Edit An Article</h5>
                 <div className="row">
                 <div className="input-field col s12">
@@ -72,6 +76,17 @@ class EditArticle extends Component {
                         { notification ? <p>{ notification }</p> : null}
                     </div>
                 </form>
+                : <div className="sweet-loading">
+                    <ClipLoader 
+                        sizeUnit={"px"}
+                        size={200}
+                        color={"#0659FB"}
+                        loading={this.state.loading}
+                    />
+            </div>
+            
+            }
+            
             </div>
         )
     }

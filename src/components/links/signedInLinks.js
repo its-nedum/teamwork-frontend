@@ -46,7 +46,6 @@ const SignedInLinks = () => {
             </div>
         )
     }
-    
 }
 
 export default SignedInLinks

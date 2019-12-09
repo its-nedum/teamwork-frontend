@@ -4,11 +4,10 @@ import {Link} from 'react-router-dom'
 const Feeds = (props) => {
     //console.log(props)
     const {feeds} = props
-    const allFeeds = feeds.feeds
-    
+    //console.log(feeds)
     return (
         <div className="col s12 m9">
-        { allFeeds && allFeeds.map(feed => {
+        { feeds && feeds.map(feed => {
             
         return (
                 <div className="card z-depth-0" key={feed.id}>

@@ -27,7 +27,7 @@ export const createUser = (user) => {
 }
 
  
-export const loginUser = (user) => { 
+export const loginUser = (user, ownProps) => { 
     try{
     return (dispatch) => {
         //FETCH API call 
@@ -44,6 +44,7 @@ export const loginUser = (user) => {
                 const user = data.data
                 localStorage.setItem('teamworkToken', data.data.token)
                 dispatch({type: 'USER_LOGIN', user})
+                ownProps.history.push('/feed')
             })
         .catch( (err) => {
             dispatch({ type: 'USER_LOGIN_ERROR', err });

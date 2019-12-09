@@ -3,10 +3,12 @@ import Feeds from '../articles/feeds'
 import setAuthToken from '../../helpers/setAuthToken'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {ClipLoader} from 'react-spinners'
 
  class Dashboard extends Component {
      state = {
-         feeds: []
+         feeds: [],
+         isLoaded: false
      }
 
   async componentDidMount(){
@@ -24,7 +26,8 @@ import {connect} from 'react-redux'
       const myData = await response.json();
       this.setState({
           feeds: myData.data
-      })
+      });
+      this.setState({isLoaded: true})
       
     }catch(err){ 
         console.log(err)
@@ -38,7 +41,19 @@ import {connect} from 'react-redux'
        if(!authToken) return <Redirect to='/signin' />
         return (
             <div className="container row section">
-                <Feeds feeds={this.state}/> 
+            {this.state.isLoaded ? 
+                <Feeds feeds={this.state.feeds}/> 
+                :
+                <div className="sweet-loading">
+                    <ClipLoader 
+                        sizeUnit={"px"}
+                        size={200}
+                        color={"#0659FB"}
+                        loading={this.state.loading}
+                    />
+                </div>
+            }
+                
             </div>
         )
     }

@@ -5,8 +5,9 @@ import {Redirect} from 'react-router-dom'
 
 class CreateGif extends Component {
     state = {
-        title: '',
-        gif: ''
+        title: null,
+        gif: null,
+        emptyVarError: null
     }
 
     handleChange = (e) => {
@@ -23,10 +24,15 @@ class CreateGif extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        formData.append('title', this.state.title)
-        formData.append('gif', this.state.gif)
-       this.props.createGif(formData)
+        if(this.state.title !== null && this.state.gif !== null){
+            const formData = new FormData()
+            formData.append('title', this.state.title)
+            formData.append('gif', this.state.gif)
+            this.props.createGif(formData)
+        }else{
+            this.setState({emptyVarError: 'All fields are required'})
+        }
+        
     }
 
     render() {
@@ -57,6 +63,7 @@ class CreateGif extends Component {
                 </div>
                 <div className="red-text center">
                         { notification ? <p>{ notification }</p> : null}
+                        { this.state.emptyVarError }
                     </div>  
                 </form>
             </div>

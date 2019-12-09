@@ -7,7 +7,9 @@ import {Redirect} from 'react-router-dom'
 class SignIn extends Component {
     state = {
         email: null,
-        password: null
+        password: null,
+        btnValue: 'Login',
+        emptyVarError: null
     }
 
     handleChange = (e) => {
@@ -18,7 +20,13 @@ class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-      this.props.login(this.state)    
+        if(this.state.email !== null && this.state.password !== null){
+            this.setState({btnValue: 'Please wait...'})
+            this.props.login(this.state) 
+        }else{
+            this.setState({emptyVarError: 'All fields is required'})
+        }
+         
     }
 
     render(){
@@ -39,10 +47,11 @@ class SignIn extends Component {
                     </div>
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>LogIn</button>
+                        <input type="button" value={this.state.btnValue} className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit} />
                     </div>
                     <div className="red-text center">
                         { notification ? <p>{ notification }</p> : null}
+                        {this.state.emptyVarError}
                     </div>
                 </form>
                
@@ -58,9 +67,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login: (user) => dispatch(loginUser(user))
+        login: (user) => dispatch(loginUser(user, ownProps))
     }
 }
 

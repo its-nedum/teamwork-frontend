@@ -6,10 +6,12 @@ import AddArticleComment from '../comments/addArticleComment'
 import {deleteArticle} from '../../store/actions/articlesActions'
 import setAuthToken from '../../helpers/setAuthToken'
 import {Redirect} from 'react-router-dom'
+import {ClipLoader} from 'react-spinners'
 
 class ArticleWithComment extends Component {
     state = {
-        article: []
+        article: [],
+        isLoaded: false
     }
 
  async componentDidMount(){
@@ -28,7 +30,7 @@ class ArticleWithComment extends Component {
      this.setState({
          article: myData.data
      })
-    
+    this.setState({isLoaded: true})
    }catch(err){ 
        console.log(err)
    }
@@ -47,6 +49,8 @@ class ArticleWithComment extends Component {
         if(!authToken) return <Redirect to='/signin' />
     return (
         <div className="container section">
+            {this.state.isLoaded ?
+            <div>
             <div className="row">
                 <SingleArticle article={article} deleteArticle={this.props.deleteArticle}/>
                 <AddArticleComment articleId={articleId}/>
@@ -54,6 +58,17 @@ class ArticleWithComment extends Component {
             <div className="row">
                 <ArticleComment comments={comments}/>
             </div>
+            </div>
+            : <div className="sweet-loading">
+                <ClipLoader 
+                    sizeUnit={"px"}
+                    size={200}
+                    color={"#0659FB"}
+                    loading={this.state.loading}
+                />
+            </div>
+            }
+            
         </div>
     )
 }
