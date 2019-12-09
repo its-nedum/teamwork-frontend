@@ -6,12 +6,14 @@ import {connect} from 'react-redux'
 import {ClipLoader} from 'react-spinners'
 
  class Dashboard extends Component {
+
      state = {
          feeds: [],
          isLoaded: false
      }
 
   async componentDidMount(){
+      this._isMounted = true
        try {
        const response = await fetch('https://its-nedum-teamwork-api.herokuapp.com/api/v1/feed', {
         headers: {
@@ -31,8 +33,7 @@ import {ClipLoader} from 'react-spinners'
       
     }catch(err){ 
         console.log(err)
-    }
-       
+    }   
     }
    
 

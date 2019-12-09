@@ -7,7 +7,7 @@ const  About = () => {
                 <h4>Teamwork is an internal social network for employees of an organization. The goal of this
                 application is to facilitate more interaction between colleagues and promote team bonding.</h4>
                 <p></p>
-                <span>User account can only be created by an Admin but you're my guys so..</span>
+                
                 
                 <p>Don't forget to leave your feedback on <a href='https://www.twitter.com/its_nedum' target="_blank" rel="noopener noreferrer">Twitter</a></p>
                 </div>
@@ -20,7 +20,7 @@ const  About = () => {
                 <h6>Instagram: <a href='https://www.instagram.com/its_nedum' target="_blank" rel="noopener noreferrer">its_nedum</a></h6>
                 <h6>Facebook: <a href='https://www.facebook.com/itsnedum' target="_blank" rel="noopener noreferrer"> itsnedum</a></h6>
                 </div>
-                        
+                  
             </div>
         )
     }

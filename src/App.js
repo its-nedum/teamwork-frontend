@@ -12,7 +12,7 @@ import ArticleWithComment from './components/articles/articleWithComment';
 import Dashboard from './components/auths/dashboard';
 import GifWithComment from './components/gifs/gifWithComment';
 import About from './components/links/about';
-
+// import Footer from './components/links/footer'
 class App extends Component {
   render(){
     return (
@@ -31,6 +31,7 @@ class App extends Component {
           <Route path='/signup' component={SignUp} />
           <Route path='/about' component={About} />
         </Switch>
+       
       </div>
       </BrowserRouter>
     );
