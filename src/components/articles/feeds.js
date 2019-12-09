@@ -6,7 +6,7 @@ const Feeds = (props) => {
     const {feeds} = props
     //console.log(feeds)
     return (
-        <div className="col s12 m9">
+        <div className="col s12">
         { feeds && feeds.map(feed => {
             
         return (
