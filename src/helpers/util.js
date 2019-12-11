@@ -1,4 +1,3 @@
-
 export const logOut = () => {
     localStorage.removeItem('teamworkToken')
     //props.history.push

@@ -1,4 +1,5 @@
 import setAuthToken from '../../helpers/setAuthToken'
+import {history} from '../../App'
 
 export const createUser = (user) => { 
     try{
@@ -27,7 +28,7 @@ export const createUser = (user) => {
 }
 
  
-export const loginUser = (user, ownProps) => { 
+export const loginUser = (user) => { 
     try{
     return (dispatch) => {
         //FETCH API call 
@@ -44,7 +45,8 @@ export const loginUser = (user, ownProps) => {
                 const user = data.data
                 localStorage.setItem('teamworkToken', data.data.token)
                 dispatch({type: 'USER_LOGIN', user})
-                ownProps.history.push('/feed')
+                history.push('/feed')
+                window.location.reload()
             })
         .catch( (err) => {
             dispatch({ type: 'USER_LOGIN_ERROR', err });
