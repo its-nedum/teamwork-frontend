@@ -15,7 +15,7 @@ import About from './components/links/about';
 // import Footer from './components/links/footer'
 import {createBrowserHistory} from 'history'
 export const history = createBrowserHistory()
-console.log(history)
+
 class App extends Component {
   render(){
     return (
